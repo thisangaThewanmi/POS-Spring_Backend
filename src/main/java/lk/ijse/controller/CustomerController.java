@@ -13,6 +13,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/v1/customer")
 public class CustomerController {
@@ -57,6 +59,30 @@ public class CustomerController {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<CustomerDto> getALlNotes(){
+        return customerService.getAllCustomers();
+    }
+
+
+    @PutMapping(value = "/{cusId}")
+    public ResponseEntity<Void> updateNote(@PathVariable ("cusId") String cusId, @RequestBody CustomerDto updatedCusDTO) {
+        //validations
+        try {
+            if (!RegexProcess.cusMatcher(cusId) || updatedCusDTO == null) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            customerService.updateCustomer(cusId, updatedCusDTO);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (CustomerNotFoundException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
