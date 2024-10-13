@@ -1,6 +1,9 @@
 package lk.ijse.dto;
 
+import jakarta.transaction.Transactional;
+
 import java.io.Serializable;
 
-public interface CustomerStatus extends SuperDto {
+@Transactional
+public interface CustomerStatus extends Serializable,SuperDto {
 }
