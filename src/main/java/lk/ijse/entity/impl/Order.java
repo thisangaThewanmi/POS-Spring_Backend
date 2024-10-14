@@ -22,6 +22,7 @@ public class Order {
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "customer_id", nullable = false)
         private CustomerEntity customer;
+        //eka order ekakata 1 customere kenk nisa 1 entity ekakk
 
         @ManyToMany(cascade = CascadeType.ALL)
         @JoinTable(

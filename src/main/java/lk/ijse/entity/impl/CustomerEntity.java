@@ -26,6 +26,7 @@ public class CustomerEntity {
 
     @OneToMany(mappedBy = "customer")
     private List<Order> orders;
+    //1 customerta orders gdk nisa list ekaka
 
 
 

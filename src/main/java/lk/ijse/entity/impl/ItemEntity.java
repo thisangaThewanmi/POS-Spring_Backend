@@ -22,8 +22,9 @@ public class ItemEntity {
         private String code;
         private String name;
         private Double price;
-        private int qty;
+        private String qty;
         @ManyToMany(mappedBy = "items")
         private List<Order> orders;
+
     }
 

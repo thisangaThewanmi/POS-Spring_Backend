@@ -1,7 +1,9 @@
 package lk.ijse.util;
 
 import lk.ijse.dto.CustomerDto;
+import lk.ijse.dto.ItemDto;
 import lk.ijse.entity.impl.CustomerEntity;
+import lk.ijse.entity.impl.ItemEntity;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,17 @@ public class Mapping {
     }
     public List<CustomerDto> asUserDTOList(List<CustomerEntity > customerEntities) {
         return modelMapper.map(customerEntities, new TypeToken<List<CustomerDto>>() {}.getType());
+    }
+
+
+    public ItemEntity toItemEntity (ItemDto itemDto) {
+        return modelMapper.map(itemDto, ItemEntity.class);
+    }
+    public ItemDto toItemDto(ItemEntity itemEntity ) {
+        return modelMapper.map(itemEntity, ItemDto.class);
+    }
+    public List<ItemDto> asItemDTOList(List<ItemEntity> itemEntities) {
+        return modelMapper.map(itemEntities, new TypeToken<List<ItemDto>>() {}.getType());
     }
     /*//for note mapping
     public NoteDTO toNoteDTO(NoteEntity noteEntity) {

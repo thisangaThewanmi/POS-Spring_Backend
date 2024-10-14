@@ -2,7 +2,7 @@ package lk.ijse.service;
 
 import jakarta.transaction.Transactional;
 import jdk.swing.interop.SwingInterOpUtils;
-import lk.ijse.customStatusCodes.SelectedUserAndNoteErrorStatus;
+import lk.ijse.customStatusCodes.SelectedCustomerErrorStatus;
 import lk.ijse.dao.CustomerDao;
 import lk.ijse.dto.CustomerDto;
 import lk.ijse.dto.CustomerStatus;
@@ -57,15 +57,15 @@ public class CustomerServiceImpl implements CustomerService {
             System.out.println(selectedCustomer);
             return customerMapping.toCustomerDto(selectedCustomer);
         }else {
-            return new SelectedUserAndNoteErrorStatus(2,"Selected customer not found");
+            return new SelectedCustomerErrorStatus(2,"Selected customer not found");
         }
     }
 
     @Override
     public void deleteCustomer(String customerId) {
 
-        Optional<CustomerEntity> foundNote = customerDao.findById(customerId);
-        if (!foundNote.isPresent()) {
+        Optional<CustomerEntity> foundCustomer = customerDao.findById(customerId);
+        if (!foundCustomer.isPresent()) {
             throw new CustomerNotFoundException("Customer not found");
         }else {
             customerDao.deleteById(customerId);
