@@ -30,7 +30,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void saveCustomer(CustomerDto customerDto) {
-        customerDto.setId(AppUtil.generateCustomerId());
+        /*customerDto.setId(AppUtil.generateCustomerId());*/
 
         CustomerEntity savedCustomer = customerDao.save(customerMapping.toCustomerEntity(customerDto));
 

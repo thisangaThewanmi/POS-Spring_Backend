@@ -15,12 +15,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/*@CrossOrigin(origins = "http://localhost:63342")*/
 @RestController
 @RequestMapping("api/v1/customer")
 public class CustomerController {
 
     @Autowired
     private CustomerService customerService;
+
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> saveNote(@RequestBody CustomerDto customerDto) {
@@ -48,13 +50,11 @@ public class CustomerController {
     }
 
     @DeleteMapping(value = "/{cusId}")
-    public ResponseEntity<Void> deleteNote(@PathVariable ("cusId") String cusId){
+    public ResponseEntity<Void> deleteCustomer(@PathVariable ("cusId") String cusId){
         try {
-            if (!RegexProcess.cusMatcher(cusId)) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
             customerService.deleteCustomer(cusId);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
         }catch (CustomerNotFoundException e){
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -74,12 +74,9 @@ public class CustomerController {
     public ResponseEntity<Void> updateNote(@PathVariable ("cusId") String cusId, @RequestBody CustomerDto updatedCusDTO) {
         //validations
         try {
-            if (!RegexProcess.cusMatcher(cusId) || updatedCusDTO == null) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
             customerService.updateCustomer(cusId, updatedCusDTO);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (CustomerNotFoundException e) {
+      } catch (CustomerNotFoundException e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
