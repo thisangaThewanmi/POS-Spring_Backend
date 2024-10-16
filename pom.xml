@@ -89,6 +89,14 @@
             <version>9.0.0</version>
         </dependency>
 
+       <!-- extra to abondeend annotation
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version> &lt;!&ndash; Ensure you're using a version that supports your Java version &ndash;&gt;
+        </dependency>-->
+
+
         <!--hibernate core-->
         <dependency>
             <groupId>org.hibernate.orm</groupId>
@@ -101,6 +109,13 @@
             <groupId>org.modelmapper</groupId>
             <artifactId>modelmapper</artifactId>
             <version>3.2.1</version>
+        </dependency>
+
+        <!--pre destroy -->
+        <dependency>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
+            <version>2.1.1</version>
         </dependency>
 
     </dependencies>

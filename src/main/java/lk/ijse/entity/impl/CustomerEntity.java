@@ -25,7 +25,7 @@ public class CustomerEntity {
     private String phone;
 
     @OneToMany(mappedBy = "customer")
-    private List<Order> orders;
+    private List<OrderEntity> orders;
     //1 customerta orders gdk nisa list ekaka
 
 

@@ -1,7 +1,6 @@
 package lk.ijse.service;
 
 import jakarta.transaction.Transactional;
-import jdk.swing.interop.SwingInterOpUtils;
 import lk.ijse.customStatusCodes.SelectedCustomerErrorStatus;
 import lk.ijse.dao.CustomerDao;
 import lk.ijse.dto.CustomerDto;
@@ -9,7 +8,6 @@ import lk.ijse.dto.CustomerStatus;
 import lk.ijse.entity.impl.CustomerEntity;
 import lk.ijse.exception.CustomerNotFoundException;
 import lk.ijse.exception.DataPersistException;
-import lk.ijse.util.AppUtil;
 import lk.ijse.util.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

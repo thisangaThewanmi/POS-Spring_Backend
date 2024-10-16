@@ -1,5 +1,7 @@
 package lk.ijse.config;
 
+import com.mysql.cj.jdbc.AbandonedConnectionCleanupThread;
+import jakarta.annotation.PreDestroy;
 import jakarta.persistence.EntityManagerFactory;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +16,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
+import java.sql.DriverManager;
 
 @Configuration
 @ComponentScan(basePackages = "lk.ijse")
@@ -41,7 +44,7 @@ public class WebAppRootConfig {
             dmds.setDriverClassName("com.mysql.cj.jdbc.Driver");
 
 
-            dmds.setUrl("jdbc:mysql://localhost:3306/SpringPos?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true");
+            dmds.setUrl("jdbc:mysql://localhost:3306/SpringPosFinal?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true");
             dmds.setUsername("root");
             dmds.setPassword("Ijse@1234");
             return dmds;
@@ -74,6 +77,28 @@ public class WebAppRootConfig {
             return txManager;
         }
 
+        @PreDestroy
+        //meka one wene server eka connection close karaganna kilin stop unoth threa eka allow karannen aluthen connection ekak hadanna cause parana
+        //conection eka nisa  eth eka nisa memory leak wei kila so thread eka close karala driver eka aye restart karanna ona
+       public void cleanUp() {
+        try {
+            // Clean up the abandoned connection thread
+
+            AbandonedConnectionCleanupThread.checkedShutdown();
+            System.out.println("AbandonedConnectionCleanupThread shut down successfully.");
+
+
+            // Deregister the MySQL JDBC driver to avoid memory leaks
+
+            DriverManager.deregisterDriver(DriverManager.getDriver("jdbc:mysql://localhost:3306"));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
+    }
+
+
 
 

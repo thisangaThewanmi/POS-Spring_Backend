@@ -1,16 +1,12 @@
 package lk.ijse.controller;
 
-import jakarta.transaction.Transactional;
-import lk.ijse.dto.CustomerDto;
-import lk.ijse.dto.CustomerStatus;
+import lk.ijse.dto.ItemCartDto;
 import lk.ijse.dto.ItemDto;
 import lk.ijse.dto.ItemStatus;
 import lk.ijse.exception.CustomerNotFoundException;
 import lk.ijse.exception.DataPersistException;
 import lk.ijse.service.ItemService;
-import lk.ijse.util.RegexProcess;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +29,9 @@ public class ItemController {
     //ResponseEntity<Void>: This indicates that the method will return an HTTP response entity with a status code and no body (Void).
     public ResponseEntity<Void> addItem(@RequestBody ItemDto itemdto) {
 
+        if (itemdto.getCode() == null || itemdto.getCode().isEmpty()) {
+            throw new IllegalArgumentException("Item code cannot be null or empty");
+        }
         try{
 
             itemService.saveItem(itemdto);
@@ -61,11 +60,9 @@ public class ItemController {
     @DeleteMapping(value = "/{itemId}")
     public ResponseEntity<Void> deleteItem(@PathVariable ("itemId") String itemId){
         try {
-            if (!RegexProcess.itemMatcher(itemId)) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
             itemService.deleteItem(itemId);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
         }catch (CustomerNotFoundException e){
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -77,6 +74,7 @@ public class ItemController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<ItemDto> getALlItems(){
+
         return itemService.getAllItems();
     }
 
@@ -85,11 +83,9 @@ public class ItemController {
     public ResponseEntity<Void> updateItem(@PathVariable ("itemId") String itemId, @RequestBody ItemDto updatedItemDTO) {
         //validations
         try {
-            if (!RegexProcess.itemMatcher(itemId) || updatedItemDTO == null) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
             itemService.updateItem(itemId, updatedItemDTO);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
         } catch (CustomerNotFoundException e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

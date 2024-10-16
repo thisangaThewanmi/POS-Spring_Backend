@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.math.BigDecimal;
 import java.util.List;
 
 @AllArgsConstructor
@@ -13,16 +13,23 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "orders")
-public class Order {
+public class OrderEntity {
 
         @Id
         private String orderId;
-        private LocalDate orderDate;
-        private Double total;
+        private String orderDate;
+
+
+
         @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "customer_id", nullable = false)
+        @JoinColumn(name = "customerId", nullable = false)
         private CustomerEntity customer;
         //eka order ekakata 1 customere kenk nisa 1 entity ekakk
+
+        private String customerName;
+        private BigDecimal total;
+        private BigDecimal discount;
+        private BigDecimal subtotal;
 
         @ManyToMany(cascade = CascadeType.ALL)
         @JoinTable(

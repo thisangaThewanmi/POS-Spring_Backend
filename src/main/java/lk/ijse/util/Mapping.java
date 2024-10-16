@@ -1,9 +1,12 @@
 package lk.ijse.util;
 
 import lk.ijse.dto.CustomerDto;
+import lk.ijse.dto.ItemCartDto;
 import lk.ijse.dto.ItemDto;
+import lk.ijse.dto.OrderDto;
 import lk.ijse.entity.impl.CustomerEntity;
 import lk.ijse.entity.impl.ItemEntity;
+import lk.ijse.entity.impl.OrderEntity;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,23 +31,27 @@ public class Mapping {
 
 
     public ItemEntity toItemEntity (ItemDto itemDto) {
+
         return modelMapper.map(itemDto, ItemEntity.class);
     }
     public ItemDto toItemDto(ItemEntity itemEntity ) {
+
         return modelMapper.map(itemEntity, ItemDto.class);
     }
     public List<ItemDto> asItemDTOList(List<ItemEntity> itemEntities) {
         return modelMapper.map(itemEntities, new TypeToken<List<ItemDto>>() {}.getType());
     }
-    /*//for note mapping
-    public NoteDTO toNoteDTO(NoteEntity noteEntity) {
-        return modelMapper.map(noteEntity, NoteDTO.class);
+
+
+    //for orders
+    public OrderDto toOrderDTO(OrderEntity orderEntity) {
+        return modelMapper.map(orderEntity, OrderDto.class);
     }
-    public NoteEntity toNoteEntity(NoteDTO noteDTO) {
-        return modelMapper.map(noteDTO, NoteEntity.class);
+    public OrderEntity toOrderEntity(OrderDto orderDto) {
+        return modelMapper.map(orderDto, OrderEntity.class);
     }
-    public List<NoteDTO> asNoteDTOList(List<NoteEntity> noteEntities) {
-        return modelMapper.map(noteEntities, new TypeToken<List<NoteDTO>>() {}.getType());
-    }*/
+    public List<OrderDto> asOrderDTOList(List<OrderEntity> orderEntities) {
+        return modelMapper.map(orderEntities, new TypeToken<List<OrderDto>>() {}.getType());
+    }
 
 }

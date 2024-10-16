@@ -1,7 +1,6 @@
 package lk.ijse.service;
 
-import lk.ijse.dto.CustomerDto;
-import lk.ijse.dto.CustomerStatus;
+import lk.ijse.dto.ItemCartDto;
 import lk.ijse.dto.ItemDto;
 import lk.ijse.dto.ItemStatus;
 

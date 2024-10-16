@@ -6,7 +6,6 @@ import lk.ijse.dto.CustomerStatus;
 import lk.ijse.exception.CustomerNotFoundException;
 import lk.ijse.exception.DataPersistException;
 import lk.ijse.service.CustomerService;
-import lk.ijse.util.RegexProcess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

@@ -24,7 +24,7 @@ public class ItemEntity {
         private Double price;
         private String qty;
         @ManyToMany(mappedBy = "items")
-        private List<Order> orders;
+        private List<OrderEntity> orders;
 
     }
 
