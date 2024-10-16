@@ -18,7 +18,7 @@ public class OrderDto {
     private String orderId;
     private String orderDate;
     private String customerId;
-    private String customerName;
+   /* private String customerName;*/
     private BigDecimal total;
     private BigDecimal discount;
     private BigDecimal subtotal;
