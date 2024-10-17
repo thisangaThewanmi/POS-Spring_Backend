@@ -30,7 +30,7 @@ Run the index.html file of the frontend project.
 
 ## API Documentation
 For comprehensive API documentation, please refer to the following Postman link:
-https://documenter.getpostman.com/view/36186317/2sAXxV6qVx 
+https://documenter.getpostman.com/view/36186317/2sAXxV7WJy 
 
 
 #### Usage
